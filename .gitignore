@@ -1,0 +1,12 @@
+# Local lab data
+*.vmdk
+*.ova
+*.ovf
+*.zip
+*.key
+*.pem
+.env
+venv/
+.venv/
+__pycache__/
+*.pyc
